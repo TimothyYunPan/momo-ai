@@ -4,11 +4,12 @@ const API_BASE_URL = 'http://13.113.249.51:8000'
 
 export async function GET(
   request: Request,
-  { params }: { params: { path: string[] } }
+  { params }: { params: Promise<{ path: string[] }> }
 ) {
   try {
-    params = await params
-    const path = params.path.join('/')
+    // params = await params
+    // const 
+    const path = (await params).path.join('/')
     const url = new URL(request.url)
     const searchParams = url.searchParams.toString()
 
@@ -36,11 +37,12 @@ export async function GET(
 
 export async function POST(
   request: Request,
-  { params }: { params: { path: string[] } }
+  { params }: { params: Promise<{ path: string[] }> }
 ) {
   try {
-    params = await params
-    const path = params.path.join('/')
+    const path = (await params).path.join('/')
+
+    // const path = params.path.join('/')
     console.log(path)
     const body = await request.json()
 
