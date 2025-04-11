@@ -7,6 +7,7 @@ export async function GET(
   { params }: { params: { path: string[] } }
 ) {
   try {
+    params = await params
     const path = params.path.join('/')
     const url = new URL(request.url)
     const searchParams = url.searchParams.toString()
@@ -38,6 +39,7 @@ export async function POST(
   { params }: { params: { path: string[] } }
 ) {
   try {
+    params = await params
     const path = params.path.join('/')
     console.log(path)
     const body = await request.json()
