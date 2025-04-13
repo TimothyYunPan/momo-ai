@@ -46,7 +46,7 @@ export interface StoryOutlineType {
   id: number
 }
 
-export const defaultCompletedStory = {
+const defaultCompletedStory = {
   overall_story_text: "",
   story_segments: [],
   story_images: [],

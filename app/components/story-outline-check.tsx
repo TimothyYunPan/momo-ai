@@ -6,7 +6,7 @@ import { Dispatch, SetStateAction } from "react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import MomoSVG from "./MomoSVG"
-import { StoryOutlineType, defaultCompletedStory } from "../storybook/page"
+import { StoryOutlineType } from "../storybook/page"
 
 // 模擬從上一頁獲取的數據
 // const mockStoryData = {
@@ -23,7 +23,7 @@ import { StoryOutlineType, defaultCompletedStory } from "../storybook/page"
 interface StoryOutLineCheckProps {
   setStoryStep: Dispatch<SetStateAction<number>>
   storyOutline: StoryOutlineType
-  setCompletedStory: Dispatch<SetStateAction<typeof defaultCompletedStory>>
+  setCompletedStory: Dispatch<SetStateAction<any>>
 }
 
 export default function StoryOutLineCheck({ setStoryStep, storyOutline, setCompletedStory }: StoryOutLineCheckProps) {
