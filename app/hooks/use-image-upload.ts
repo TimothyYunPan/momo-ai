@@ -10,7 +10,6 @@ export function useImageUpload() {
     try {
       setUploadSuccess(false)
 
-      // 1. 獲取 presigned URL
       const presignedResponse = await fetch("/api/proxy/api/v1/s3/presigned-url", {
         method: "POST",
         headers: {
@@ -29,7 +28,6 @@ export function useImageUpload() {
 
       const { url } = await presignedResponse.json()
 
-      // 2. 使用 presigned URL 上傳文件
       const uploadResponse = await fetch(url, {
         method: "PUT",
         body: file,
@@ -39,12 +37,10 @@ export function useImageUpload() {
         throw new Error("Failed to upload file")
       }
 
-      // 3. 設置上傳的圖片 URL (從 S3 URL 中提取)
       const imageUrl = url.split("?")[0]
       setUploadedImage(imageUrl)
       setUploadSuccess(true)
 
-      // 顯示成功訊息 3 秒
       setTimeout(() => setUploadSuccess(false), 3000)
 
       return imageUrl

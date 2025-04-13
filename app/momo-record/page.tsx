@@ -62,7 +62,7 @@ export default function MomoRecordPage() {
     return index !== -1 ? index + 1 : null
   }
 
-  // 處理製作紀念冊按鈕點擊
+  // 處理產生紀念冊按鈕點擊
   const handleCreateMemory = () => {
     // 在實際應用中，這裡會將選擇的圖片ID傳遞給下一個頁面
     if (selectedImages.length > 0) {
@@ -183,7 +183,7 @@ export default function MomoRecordPage() {
                   className={selectedImages.length === 0 ? "opacity-50 cursor-not-allowed" : ""}
                   onClick={handleCreateMemory}
                 >
-                  製作紀念冊
+                  產生紀念冊
                 </StyledButton>
               </div>
 

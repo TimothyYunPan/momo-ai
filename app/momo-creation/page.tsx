@@ -84,13 +84,8 @@ export default function MomoCreationPage() {
         {/* Main content - with 120px padding */}
         <main className="max-w-[1200px] mx-auto">
           <div className="mb-12">
-            <div className="flex items-center mb-3">
-              <div className="text-[#5a4ff3] mr-2">
-                <MomoSVG src="/image/fairy-wand.svg" width="24px" height="24px"></MomoSVG>
-              </div>
-              <h4 className="text-xl font-bold text-[#5A4FF3]">墨墨 AI 創作</h4>
-            </div>
-            <h2 className="text-3xl font-bold mb-6 text-[#323343]">你今天想畫些什麼？</h2>
+
+            <h2 className="text-3xl font-bold mb-6 text-[#323343]  mt-10">你今天想畫些什麼？</h2>
 
             <PromptInput
               promptText={promptText}

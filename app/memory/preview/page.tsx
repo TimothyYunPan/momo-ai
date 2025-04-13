@@ -7,7 +7,7 @@ import Link from "next/link"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
 import { BackgroundShapes } from "../../components/background-shapes"
 
-// 模擬生成的紀念冊選項
+// 模擬產生的紀念冊選項
 const generatedOptions = [
   {
     id: "option-1",
@@ -158,7 +158,7 @@ export default function MemoryPreviewPage() {
                   />
                 </svg>
               </div>
-              <span className="text-sm text-[#5a4ff3] mt-2">製作</span>
+              <span className="text-sm text-[#5a4ff3] mt-2">產生</span>
             </div>
             <div className="flex-1 h-[2px] bg-[#e4e4ea] mx-4 relative">
               <div className="absolute inset-0 bg-[#5a4ff3] w-1/2"></div>
@@ -205,7 +205,7 @@ export default function MemoryPreviewPage() {
           ) : (
             // 預覽選擇頁面
             <>
-              <h2 className="text-2xl font-bold mb-8 text-[#323343]">已為你製作以下三種紀念冊，請挑選最適合的版本</h2>
+              <h2 className="text-2xl font-bold mb-8 text-[#323343]">已為你產生以下三種紀念冊，請挑選最適合的版本</h2>
 
               <div className="grid grid-cols-3 gap-6 mb-8">
                 {generatedOptions.map((option, index) => (

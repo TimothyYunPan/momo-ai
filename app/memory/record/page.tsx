@@ -125,7 +125,7 @@ export default function MemoryRecordPage() {
                   />
                 </svg>
               </div>
-              <span className="text-sm text-[#92929d] mt-2">製作</span>
+              <span className="text-sm text-[#92929d] mt-2">產生</span>
             </div>
             <div className="flex-1 h-[2px] bg-[#e4e4ea] mx-4"></div>
             <div className="flex flex-col items-center">
@@ -147,7 +147,7 @@ export default function MemoryRecordPage() {
 
         {/* Main Content */}
         <main className="max-w-[800px] mx-auto bg-white rounded-xl shadow-sm p-8 mb-12">
-          <h2 className="text-2xl font-bold mb-8 text-[#323343]">你想製作什麼樣的紀念拼貼？</h2>
+          <h2 className="text-2xl font-bold mb-8 text-[#323343]">你想產生什麼樣的紀念拼貼？</h2>
 
           <form onSubmit={handleSubmit}>
             <div className="mb-6">
@@ -204,7 +204,7 @@ export default function MemoryRecordPage() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                生成
+                產生
               </button>
             </div>
           </form>

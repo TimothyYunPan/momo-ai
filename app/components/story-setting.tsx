@@ -9,62 +9,93 @@ import { Header } from "../components/header"
 import StoryPreview from "../components/story-preview"
 import StoryOutLineCheck from "../components/story-outline-check"
 import MomoSVG from "./MomoSVG"
+import { StoryOutlineType } from "../storybook/page"
 
-// 定義繪本風格選項
 const illustrationStyles = [
-  { id: "soft-watercolor", label: "柔和水彩", description: "色彩柔和溫暖，適合各年齡層" },
-  { id: "childish-doodle", label: "童趣塗鴉", description: "簡約圖畫，富有趣味性，適合低齡故事" },
-  { id: "collage", label: "拼貼紙藝", description: "視覺手工拼貼，帶有層次感，適合探索、自然主題的故事" },
-  { id: "digital", label: "數位插畫", description: "線條明亮，色彩鮮明，適合情節豐富、角色表現力較強的故事" },
-  { id: "simple-geo", label: "簡單幾何", description: "簡單造型與線條，色彩鮮明，適合低齡層" },
+  { id: "SOFT_WATERCOLOR", label: "柔和水彩", description: "色彩柔和溫暖，適合各年齡層" },
+  { id: "PLAYFUL_DOODLE", label: "童趣塗鴉", description: "簡約圖畫，富有趣味性，適合低齡故事" },
+  { id: "COLLAGE_CUTOUT", label: "拼貼紙藝", description: "視覺手工拼貼，帶有層次感，適合探索、自然主題的故事" },
+  { id: "MODERN_DIGITAL_ILLUSTRATION", label: "數位插畫", description: "線條明亮，色彩鮮明，適合情節豐富、角色表現力較強的故事" },
+  { id: "MINIMALIST_GEOMETRIC", label: "簡單幾何", description: "簡單造型與線條，色彩鮮明，適合低齡層" },
 ]
 
-// 定義年齡層選項
 const ageGroups = [
-  { id: "lessThanThree", label: "0-3 歲" },
-  { id: "fourToSix", label: "4-6 歲" },
-  { id: "sevenToTwelve", label: "7-12 歲" },
+  { id: "FIRST_GRADE", label: "0-3 歲" },
+  { id: "SECOND_GRADE", label: "4-6 歲" },
+  { id: "THIRD_GRADE", label: "7-12 歲" },
 ]
 
 interface StoryData {
   concept: string
   ageGroup: string
-  characters: string
   style: string
   pageCount: number
+  characters: string
+  generatedStory?: {
+    title: string
+    story: string
+    id: number
+  }
 }
 
 interface StorySettingProps {
   setStoryStep: Dispatch<SetStateAction<number>>
   storyData: StoryData
   setStoryData: (data: StoryData) => void
+  setStoryOutline: (data: StoryOutlineType) => void
 }
 
-export default function StorySetting({ setStoryStep, storyData, setStoryData, }: StorySettingProps) {
-  const router = useRouter()
+export default function StorySetting({ setStoryStep, storyData, setStoryData, setStoryOutline }: StorySettingProps) {
+  const [isGenerating, setIsGenerating] = useState(false)
 
-  // 檢查表單是否有效
   const isFormValid = storyData.concept.trim() !== "" && storyData.characters.trim() !== ""
 
-  // 處理表單提交
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!isFormValid) return
 
-    // 在實際應用中，這裡會將所有數據發送到後端
-    console.log("提交的故事數據:", storyData)
+    setIsGenerating(true)
+    try {
+      const response = await fetch('/api/proxy/api/v1/picture_book/generate_overall_story', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_input: storyData.concept,
+          grade_level: storyData.ageGroup,
+          page_length: storyData.pageCount,
+          style: storyData.style,
+          character_context: storyData.characters
+        }),
+      })
 
-    // 然後導航到下一個頁面
-    setStoryStep(2)
+      if (!response.ok) {
+        throw new Error('產生故事失敗')
+      }
+
+      const data = await response.json()
+      console.log('產生的故事數據:', data)
+
+      // 保存產生的故事數據
+      setStoryOutline(data)
+
+      // 導航到下一個頁面
+      setStoryStep(2)
+    } catch (error) {
+      console.error('產生故事時發生錯誤:', error)
+      alert('產生故事失敗，請重試')
+    } finally {
+      setIsGenerating(false)
+    }
   }
 
   return (
     <main className="max-w-[1200px] mx-auto">
       <div className="mb-12">
-        <h2 className="text-3xl font-bold mb-12 text-[#323343]">您今天想製作什麼樣的繪本？</h2>
+        <h2 className="text-3xl font-bold mb-12 text-[#323343] mt-10">你今天想產生什麼樣的繪本？</h2>
 
-        {/* 進度指示器 - 修改顏色 */}
         <div className="flex items-center justify-center mb-12 max-w-[456px] mx-auto">
           <div className="flex flex-col items-center ">
             {/* <div className="w-10 h-10 rounded-full bg-[#5a4ff3] text-white flex items-center justify-center"> */}
@@ -189,7 +220,7 @@ export default function StorySetting({ setStoryStep, storyData, setStoryData, }:
           {/* 繪本頁數 */}
           <div className="mb-8">
             <label className="block text-xl font-bold text-[#323343] mb-4">5. 繪本頁數</label>
-            <div className="px-4">
+            <div className="px-2">
               <div className="relative">
                 <div className="w-full h-2 bg-[#e4e4ea] rounded-lg"></div>
                 <div
@@ -210,8 +241,12 @@ export default function StorySetting({ setStoryStep, storyData, setStoryData, }:
                   className="absolute top-0 left-0 w-full h-2 opacity-0 cursor-pointer"
                 />
               </div>
-              <div className="flex justify-between mt-4 text-[#696974]">
+              <div className="flex justify-between mt-4 text-[#696974] mr-[-13px] ml-[-5px]">
                 <span>5頁</span>
+                <span>6頁</span>
+                <span>7頁</span>
+                <span>8頁</span>
+                <span>9頁</span>
                 <span>10頁</span>
               </div>
             </div>
@@ -222,23 +257,33 @@ export default function StorySetting({ setStoryStep, storyData, setStoryData, }:
         <div className="flex justify-end mt-6">
           <button
             onClick={handleSubmit}
-            disabled={!isFormValid}
-            className={`px-6 py-2 rounded-lg flex items-center gap-2 ${isFormValid
+            disabled={!isFormValid || isGenerating}
+            className={`px-6 py-2 w-[136px] h-[40px] rounded-lg flex items-center gap-2 ${isFormValid && !isGenerating
               ? "bg-[#5a4ff3] text-white hover:bg-[#4840d1]"
-              : "bg-[#a8a8c0] text-white cursor-not-allowed"
+              : "bg-[#a8a8c0] text-white cursor-default"
               }`}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M12 2L14.5 9H22L16 13.5L18 21L12 17L6 21L8 13.5L2 9H9.5L12 2Z"
-                fill="currentColor"
-                stroke="currentColor"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            生成故事
+            {isGenerating ? (
+              <div className="flex space-x-1 mx-auto">
+                <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></div>
+                <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></div>
+                <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></div>
+              </div>
+            ) : (
+              <>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12 2L14.5 9H22L16 13.5L18 21L12 17L6 21L8 13.5L2 9H9.5L12 2Z"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                產生故事
+              </>
+            )}
           </button>
         </div>
       </div>
