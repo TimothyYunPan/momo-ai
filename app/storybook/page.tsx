@@ -28,19 +28,42 @@ const ageGroups = [
 
 const defaultStoryData = {
   concept: "",
-  ageGroup: "lessThanThree",
+  ageGroup: "FIRST_GRADE",
   characters: "",
-  style: "soft-watercolor",
+  style: "SOFT_WATERCOLOR",
   pageCount: 5,
 }
 
+const defaultStoryOutline = {
+  title: "",
+  story: "",
+  id: 1
+}
+
+export interface StoryOutlineType {
+  title: string,
+  story: string,
+  id: number
+}
+
+export const defaultCompletedStory = {
+  overall_story_text: "",
+  story_segments: [],
+  story_images: [],
+  composed_images: [],
+  page_length: 0,
+  grade_level: "",
+  style: "",
+  title: ""
+}
 
 export default function StorybookPage() {
 
 
   const [storyStep, setStoryStep] = useState(1)
   const [storyData, setStoryData] = useState(defaultStoryData)
-
+  const [storyOutline, setStoryOutline] = useState(defaultStoryOutline)
+  const [completedStory, setCompletedStory] = useState(defaultCompletedStory)
 
 
   return (
@@ -51,7 +74,22 @@ export default function StorybookPage() {
       <div className="relative z-10">
         <Header />
 
-        {storyStep == 1 ? <StorySetting setStoryStep={setStoryStep} storyData={storyData} setStoryData={setStoryData} /> : storyStep == 2 ? <StoryOutLineCheck setStoryStep={setStoryStep} /> : <StoryPreview setStoryStep={setStoryStep} />}
+        {storyStep == 1 ? (
+          <StorySetting
+            setStoryStep={setStoryStep}
+            storyData={storyData}
+            setStoryData={setStoryData}
+            setStoryOutline={setStoryOutline}
+          />
+        ) : storyStep == 2 ? (
+          <StoryOutLineCheck
+            setStoryStep={setStoryStep}
+            storyOutline={storyOutline}
+            setCompletedStory={setCompletedStory}
+          />
+        ) : (
+          <StoryPreview completedStory={completedStory} setStoryStep={setStoryStep} />
+        )}
         {/* Main content */}
 
 

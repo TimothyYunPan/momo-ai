@@ -14,7 +14,7 @@ export function Header() {
   return (
     <header className="flex justify-between items-center px-[120px] py-6 mb-[6px]">
       <div className="flex items-center">
-
+        <MomoSVG src="/image/logo.svg" width="139px"></MomoSVG>
       </div>
       <div className="flex items-center gap-1">
         <Link href="/momo-creation" passHref>
@@ -32,7 +32,7 @@ export function Header() {
         <Link href="/storybook" passHref>
           <NavButton isActive={pathname === "/storybook"}>
             <MomoSVG
-              src="/image/camera-line.svg"
+              src="/image/book.svg"
               width="24px"
               height="24px"
             />

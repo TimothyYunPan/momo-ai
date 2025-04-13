@@ -6,8 +6,9 @@ import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Header } from "@/app/components/header"
 import MomoSVG from "./MomoSVG"
+import { defaultCompletedStory } from "../storybook/page"
 
-// 模擬生成的繪本頁面
+// 模擬產生的繪本頁面
 const mockStoryPages = [
   {
     id: "page-1",
@@ -49,16 +50,92 @@ const mockStoryPages = [
     imageUrl: "/placeholder.svg?height=400&width=600",
     text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
   },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
+  {
+    id: "page-8",
+    imageUrl: "/placeholder.svg?height=400&width=600",
+    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
+  },
 ]
 interface StoryPreviewProps {
   setStoryStep: Dispatch<SetStateAction<number>>
+  completedStory: typeof defaultCompletedStory
 }
 
 
-export default function StoryPreview({ setStoryStep }: StoryPreviewProps) {
-  const router = useRouter()
+export default function StoryPreview({ setStoryStep, completedStory }: StoryPreviewProps) {
   const [currentPage, setCurrentPage] = useState(0)
-  const [pageCount, setPageCount] = useState(8) // 默認8頁，實際應用中應從上一頁獲取
+  const pageCount = completedStory.composed_images.length
+  // const pageCount = mockStoryPages.length
 
   const handleNextPage = () => {
     if (currentPage < pageCount - 1) {
@@ -78,7 +155,6 @@ export default function StoryPreview({ setStoryStep }: StoryPreviewProps) {
   }
 
   return (
-
     <main className="max-w-[1200px] mx-auto">
       <div className="mb-12">
         <h2 className="text-3xl font-bold mb-6 text-[#323343]">您的繪本已完成！</h2>
@@ -142,7 +218,8 @@ export default function StoryPreview({ setStoryStep }: StoryPreviewProps) {
         <div className="bg-white rounded-xl shadow-sm p-8 flex flex-col items-center border border-grey-30">
           <div className="relative w-full max-w-[600px] aspect-[4/3] mb-8">
             <Image
-              src={mockStoryPages[currentPage].imageUrl || "/placeholder.svg"}
+              src={completedStory.composed_images[currentPage] || "/placeholder.svg"}
+              // src={"/placeholder.svg"}
               alt={`Page ${currentPage + 1}`}
               fill
               className="object-contain"
@@ -152,7 +229,7 @@ export default function StoryPreview({ setStoryStep }: StoryPreviewProps) {
             {currentPage > 0 && (
               <button
                 onClick={handlePrevPage}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center"
+                className="absolute left-[-50px] top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center"
               >
                 <ChevronLeft className="w-6 h-6 text-gray-600" />
               </button>
@@ -161,32 +238,25 @@ export default function StoryPreview({ setStoryStep }: StoryPreviewProps) {
             {currentPage < pageCount - 1 && (
               <button
                 onClick={handleNextPage}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center"
+                className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center"
               >
                 <ChevronRight className="w-6 h-6 text-gray-600" />
               </button>
             )}
           </div>
 
-          {/* 頁面文字 */}
-          <div className="text-center mb-8 max-w-[600px]">
-            <p className="text-lg text-[#323343]">{mockStoryPages[currentPage].text}</p>
-          </div>
-
           {/* 頁碼指示器 */}
           <div className="flex justify-center gap-2 mb-8">
-            {mockStoryPages.slice(0, pageCount).map((_, index) => (
+            {Array.from({ length: pageCount }).map((_, index) => (
               <button
                 key={index}
-                className={`w-3 h-3 rounded-full ${index === currentPage ? "bg-[#5a4ff3]" : "bg-gray-200 hover:bg-gray-300"
-                  }`}
+                className={`w-3 h-3 rounded-full ${index === currentPage ? "bg-[#5a4ff3]" : "bg-gray-200 hover:bg-gray-300"}`}
                 onClick={() => setCurrentPage(index)}
               ></button>
             ))}
           </div>
         </div>
 
-        {/* 導航按鈕 - 統一放在外面 */}
         <div className="flex justify-between mt-6">
           <button
             onClick={() => setStoryStep(2)}
