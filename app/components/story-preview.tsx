@@ -6,7 +6,7 @@ import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Header } from "@/app/components/header"
 import MomoSVG from "./MomoSVG"
-import { defaultCompletedStory } from "../storybook/page"
+// import { defaultCompletedStory } from "../storybook/page"
 
 // 模擬產生的繪本頁面
 const mockStoryPages = [
@@ -128,7 +128,7 @@ const mockStoryPages = [
 ]
 interface StoryPreviewProps {
   setStoryStep: Dispatch<SetStateAction<number>>
-  completedStory: typeof defaultCompletedStory
+  completedStory: any
 }
 
 
