@@ -120,19 +120,15 @@ const mockStoryPages = [
     imageUrl: "/placeholder.svg?height=400&width=600",
     text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
   },
-  {
-    id: "page-8",
-    imageUrl: "/placeholder.svg?height=400&width=600",
-    text: "最後，小米在花園裡下一顆「情緒樹」，告訴新來的朋友：「我們可以一起練習，怎麼好好說出心裡的話。」",
-  },
 ]
 interface StoryPreviewProps {
   setStoryStep: Dispatch<SetStateAction<number>>
   completedStory: any
+  storyId: number
 }
 
 
-export default function StoryPreview({ setStoryStep, completedStory }: StoryPreviewProps) {
+export default function StoryPreview({ setStoryStep, completedStory, storyId }: StoryPreviewProps) {
   const [currentPage, setCurrentPage] = useState(0)
   const pageCount = completedStory.composed_images.length
   // const pageCount = mockStoryPages.length
@@ -149,9 +145,40 @@ export default function StoryPreview({ setStoryStep, completedStory }: StoryPrev
     }
   }
 
-  const handlePrint = () => {
-    // 在實際應用中，這裡會處理列印功能
-    alert("繪本列印功能將在此處實現")
+  const handlePrint = async () => {
+    const accessToken = localStorage.getItem('epson_access_token')
+    const deviceId = localStorage.getItem('epson_device_id')
+
+    if (!accessToken || !deviceId) {
+      alert('請先登入帳號')
+      return
+    }
+
+    try {
+      // 因為有多頁，所以需要逐頁列印
+      for (const imageUrl of completedStory.story_images) {
+        const response = await fetch('/api/proxy/api/v1/epson/print', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            story_id: storyId,
+            access_token: accessToken,
+            device_id: deviceId
+          }),
+        })
+
+        if (!response.ok) {
+          throw new Error('列印請求失敗')
+        }
+      }
+
+      alert('列印請求已發送')
+    } catch (error) {
+      console.error('列印錯誤:', error)
+      alert('列印失敗，請重試')
+    }
   }
 
   return (
