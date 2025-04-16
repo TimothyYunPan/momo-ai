@@ -22,8 +22,8 @@ const illustrationStyles = [
 // 定義年齡層選項
 const ageGroups = [
   { id: "0-3", label: "0-3 歲" },
-  { id: "4-6", label: "4-6 歲" },
-  { id: "7-12", label: "7-12 歲" },
+  { id: "4-7", label: "4-7 歲" },
+  { id: "9-12", label: "9-12 歲" },
 ]
 
 const defaultStoryData = {
