@@ -21,8 +21,8 @@ const illustrationStyles = [
 
 const ageGroups = [
   { id: "FIRST_GRADE", label: "0-3 歲" },
-  { id: "SECOND_GRADE", label: "4-6 歲" },
-  { id: "THIRD_GRADE", label: "7-12 歲" },
+  { id: "SECOND_GRADE", label: "4-7 歲" },
+  { id: "THIRD_GRADE", label: "8-12 歲" },
 ]
 
 interface StoryData {
