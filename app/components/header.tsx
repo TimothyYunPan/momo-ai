@@ -16,7 +16,7 @@ function EpsonLoginHandler() {
       const handleTokenExchange = async () => {
         try {
           const response = await fetch('/api/proxy/api/v1/epson/token', {
-            method: 'POST',
+            method: 'GET',
             headers: {
               'Content-Type': 'application/json',
             },
