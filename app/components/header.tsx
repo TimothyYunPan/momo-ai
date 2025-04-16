@@ -12,6 +12,31 @@ function EpsonLoginHandler() {
   const code = searchParams.get('code')
   console.log(code)
 
+  const fetchDevices = async (accessToken: string) => {
+    try {
+      const response = await fetch('/api/proxy/api/v1/epson/devices', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error('獲取設備列表失敗')
+      }
+
+      const data = await response.json()
+      if (data.devices && data.devices.length > 0) {
+        // 儲存第一個設備的 device_id
+        localStorage.setItem('epson_device_id', data.devices[0].device_id)
+      }
+    } catch (error) {
+      console.error('獲取設備列表錯誤:', error)
+      alert('獲取設備列表失敗，請重試')
+    }
+  }
+
   useEffect(() => {
     if (code) {
       const handleTokenExchange = async () => {
@@ -30,6 +55,7 @@ function EpsonLoginHandler() {
           const data = await response.json()
           if (data.access_token) {
             localStorage.setItem('epson_access_token', data.access_token)
+            fetchDevices(data.access_token)
             window.history.replaceState({}, '', window.location.pathname)
           }
         } catch (error) {
@@ -71,30 +97,7 @@ export function Header() {
     }
   }
 
-  const fetchDevices = async (accessToken: string) => {
-    try {
-      const response = await fetch('/api/proxy/api/v1/epson/devices', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`,
-        },
-      })
 
-      if (!response.ok) {
-        throw new Error('獲取設備列表失敗')
-      }
-
-      const data = await response.json()
-      if (data.devices && data.devices.length > 0) {
-        // 儲存第一個設備的 device_id
-        localStorage.setItem('epson_device_id', data.devices[0].device_id)
-      }
-    } catch (error) {
-      console.error('獲取設備列表錯誤:', error)
-      alert('獲取設備列表失敗，請重試')
-    }
-  }
 
   return (
     <header className="flex justify-between items-center px-[120px] py-6 mb-[6px]">
