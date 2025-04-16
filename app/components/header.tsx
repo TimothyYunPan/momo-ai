@@ -9,9 +9,10 @@ import MomoSVG from "./MomoSVG"
 
 function EpsonLoginHandler() {
   const searchParams = useSearchParams()
+  const code = searchParams.get('code')
+  console.log(code)
 
   useEffect(() => {
-    const code = searchParams.get('code')
     if (code) {
       const handleTokenExchange = async () => {
         try {
@@ -40,7 +41,7 @@ function EpsonLoginHandler() {
 
       handleTokenExchange()
     }
-  }, [searchParams])
+  }, [code])
 
   return null
 }
