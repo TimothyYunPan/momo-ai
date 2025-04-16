@@ -88,7 +88,7 @@ export default function StorybookPage() {
             setCompletedStory={setCompletedStory}
           />
         ) : (
-          <StoryPreview completedStory={completedStory} setStoryStep={setStoryStep} />
+          <StoryPreview completedStory={completedStory} setStoryStep={setStoryStep} storyId={storyOutline.id} />
         )}
         {/* Main content */}
 

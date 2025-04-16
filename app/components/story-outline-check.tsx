@@ -68,7 +68,7 @@ export default function StoryOutLineCheck({ setStoryStep, storyOutline, setCompl
     const finalStoryData = {
       title: storyTitle,
       story: storyContent,
-      page_length: 5,
+      // page_length: 5,
       story_id: storyOutline.id
       // 這裡可以添加從上一頁傳過來的其他數據
     }
