@@ -20,7 +20,7 @@ function EpsonLoginHandler() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          accessToken: accessToken
+          access_token: accessToken
         })
       })
 
