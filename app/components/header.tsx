@@ -15,11 +15,13 @@ function EpsonLoginHandler() {
   const fetchDevices = async (accessToken: string) => {
     try {
       const response = await fetch('/api/proxy/api/v1/epson/devices', {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`,
         },
+        body: JSON.stringify({
+          accessToken: accessToken
+        })
       })
 
       if (!response.ok) {
