@@ -29,9 +29,10 @@ function EpsonLoginHandler() {
       }
 
       const data = await response.json()
-      if (data.devices && data.devices.length > 0) {
-        // 儲存第一個設備的 device_id
-        localStorage.setItem('epson_device_id', data.devices[0].device_id)
+      console.log(data)
+      if (data.device_id && data.device_id.length > 0) {
+        console.log(data.device_id)
+        localStorage.setItem('epson_device_id', data.device_id)
       }
     } catch (error) {
       console.error('獲取設備列表錯誤:', error)
