@@ -30,9 +30,9 @@ function EpsonLoginHandler() {
 
       const data = await response.json()
       console.log(data)
-      if (data.device_id && data.device_id.length > 0) {
-        console.log(data.device_id)
-        localStorage.setItem('epson_device_id', data.device_id)
+      if (data.serialNumber && data.serialNumber.length > 0) {
+        console.log(data.serialNumber)
+        localStorage.setItem('epson_device_id', data.serialNumber)
       }
     } catch (error) {
       console.error('獲取設備列表錯誤:', error)
