@@ -68,11 +68,10 @@ export const colorOptions: ColorOption[] = [
 // Define recommendation categories
 export const recommendationCategories: RecommendationCategory[] = [
   { id: "explore", label: "探索" },
-  { id: "popular", label: "熱門" },
-  { id: "trannsportatio", label: "交通" },
-  { id: "anime", label: "動漫" },
-  { id: "cartoon", label: "卡通" },
-  { id: "animals", label: "動物" },
+  { id: "traffic", label: "交通" },
+  { id: "comic", label: "動畫" },
+  { id: "animal", label: "動物" },
+  { id: "plant", label: "植物" },
   { id: "people", label: "人物" },
   { id: "art", label: "藝術" },
   { id: "festival", label: "節慶" },

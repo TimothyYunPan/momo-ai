@@ -47,11 +47,10 @@ export function UnifiedHeader() {
       <div className="flex items-center gap-4">
         <Link
           href="/momo-creation"
-          className={`flex items-center gap-1 px-3 py-1.5 rounded-full ${
-            isCreationActive
+          className={`flex items-center gap-1 px-3 py-1.5 rounded-full ${isCreationActive
               ? "bg-[#f1f1f5] text-[#5a4ff3] font-medium"
               : "bg-white text-[#696974] hover:text-[#5a4ff3]"
-          }`}
+            }`}
         >
           <svg className="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -67,15 +66,14 @@ export function UnifiedHeader() {
               strokeWidth="2"
             />
           </svg>
-          墨墨創作
+          墨墨著色
         </Link>
         <Link
           href="/storybook"
-          className={`flex items-center gap-1 px-3 py-1.5 rounded-full ${
-            isStorybookActive
+          className={`flex items-center gap-1 px-3 py-1.5 rounded-full ${isStorybookActive
               ? "bg-[#f1f1f5] text-[#5a4ff3] font-medium"
               : "bg-white text-[#696974] hover:text-[#5a4ff3]"
-          }`}
+            }`}
         >
           <svg className="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path

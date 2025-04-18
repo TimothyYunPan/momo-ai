@@ -155,24 +155,22 @@ export default function StoryPreview({ setStoryStep, completedStory, storyId }: 
     }
 
     try {
-      // 因為有多頁，所以需要逐頁列印
-      for (const imageUrl of completedStory.story_images) {
-        const response = await fetch('/api/proxy/api/v1/epson/print', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            story_id: storyId,
-            access_token: accessToken,
-            device_id: deviceId
-          }),
-        })
+      const response = await fetch('/api/proxy/api/v1/epson/print', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          story_id: storyId,
+          access_token: accessToken,
+          device_id: deviceId
+        }),
+      })
 
-        if (!response.ok) {
-          throw new Error('列印請求失敗')
-        }
+      if (!response.ok) {
+        throw new Error('列印請求失敗')
       }
+
 
       alert('列印請求已發送')
     } catch (error) {
@@ -184,7 +182,7 @@ export default function StoryPreview({ setStoryStep, completedStory, storyId }: 
   return (
     <main className="max-w-[1200px] mx-auto">
       <div className="mb-12">
-        <h2 className="text-3xl font-bold mb-6 text-[#323343]">您的繪本已完成！</h2>
+        <h2 className="text-3xl font-bold mb-6 text-[#323343] mt-10">您的繪本已完成！</h2>
 
         {/* 進度指示器 - 修改顏色 */}
         <div className="flex items-center justify-center mb-12 max-w-[456px] mx-auto">

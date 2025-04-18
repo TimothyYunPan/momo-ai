@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { usePathname, useSearchParams } from "next/navigation"
+import { usePathname, useSearchParams, useRouter } from "next/navigation"
 import { NavButton } from "./ui/button-styles"
 import MomoSVG from "./MomoSVG"
 
@@ -76,6 +76,7 @@ function EpsonLoginHandler() {
 
 export function Header() {
   const pathname = usePathname()
+  const router = useRouter()
 
   const handleEpsonLogin = async () => {
     try {
@@ -100,11 +101,12 @@ export function Header() {
     }
   }
 
-
-
   return (
     <header className="flex justify-between items-center px-[120px] py-6 mb-[6px]">
-      <div className="flex items-center">
+      <div
+        className="flex items-center cursor-pointer"
+        onClick={() => router.push('/momo-creation')}
+      >
         <MomoSVG src="/image/logo.svg" width="139px"></MomoSVG>
       </div>
       <div className="flex items-center gap-1">
@@ -116,7 +118,7 @@ export function Header() {
               height="24px"
             />
             <div className="ml-2">
-              墨墨創作
+              墨墨著色
             </div>
           </NavButton>
         </Link>

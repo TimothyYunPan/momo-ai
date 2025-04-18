@@ -47,8 +47,18 @@ interface StorySettingProps {
 
 export default function StorySetting({ setStoryStep, storyData, setStoryData, setStoryOutline }: StorySettingProps) {
   const [isGenerating, setIsGenerating] = useState(false)
-
+  const [pageCountIndex, setPageCountIndex] = useState(0);
   const isFormValid = storyData.concept.trim() !== "" && storyData.characters.trim() !== ""
+
+  const getProgressPercent = (pageCount: number) => {
+    if (pageCount <= 11) return 0;
+    if (pageCount <= 13) return 25;
+    if (pageCount <= 15) return 50;
+    if (pageCount <= 17) return 75;
+    return 100;
+  };
+
+  const pageCountMap = [11, 13, 15, 17, 19];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -91,6 +101,7 @@ export default function StorySetting({ setStoryStep, storyData, setStoryData, se
     }
   }
 
+  console.log(storyData.pageCount)
   return (
     <main className="max-w-[1200px] mx-auto">
       <div className="mb-12">
@@ -219,35 +230,54 @@ export default function StorySetting({ setStoryStep, storyData, setStoryData, se
 
           {/* 繪本頁數 */}
           <div className="mb-8">
-            <label className="block text-xl font-bold text-[#323343] mb-4">5. 繪本頁數</label>
+            <label className="block text-xl font-bold text-[#323343] mb-4">5. 繪本面數（含封面） </label>
             <div className="px-2">
               <div className="relative">
                 <div className="w-full h-2 bg-[#e4e4ea] rounded-lg"></div>
                 <div
                   className="absolute top-0 left-0 h-2 bg-[#5a4ff3] rounded-lg"
-                  style={{ width: `${((storyData.pageCount - 5) / 5) * 100}%` }}
+                  style={{ width: `${getProgressPercent(storyData.pageCount)}%` }}
                 ></div>
                 <div
                   className="absolute top-[-8px] left-0 w-6 h-6 bg-[#5a4ff3] rounded-full border-2 border-white"
-                  style={{ left: `calc(${((storyData.pageCount - 5) / 5) * 100}% - 12px)` }}
+                  style={{ left: `calc(${getProgressPercent(storyData.pageCount)}% - 12px)` }}
                 ></div>
                 <input
                   type="range"
-                  min="5"
-                  max="10"
-                  step="1"
-                  value={storyData.pageCount}
-                  onChange={(e) => setStoryData({ ...storyData, pageCount: Number.parseInt(e.target.value) })}
+                  min="0"
+                  max="4"
+                  step={1}
+                  value={pageCountIndex}
+                  onChange={(e) => {
+                    const index = Number.parseInt(e.target.value);
+                    setPageCountIndex(index);
+                    setStoryData({ ...storyData, pageCount: pageCountMap[index] });
+                  }}
+                  // onChange={(e) => setStoryData({ ...storyData, pageCount: Number.parseInt(e.target.value) })}
                   className="absolute top-0 left-0 w-full h-2 opacity-0 cursor-pointer"
                 />
               </div>
               <div className="flex justify-between mt-4 text-[#696974] mr-[-13px] ml-[-5px]">
-                <span>5頁</span>
-                <span>6頁</span>
-                <span>7頁</span>
-                <span>8頁</span>
-                <span>9頁</span>
-                <span>10頁</span>
+                <div className="flex flex-col items-center ml-[-24px]">
+                  <span>24 面</span>
+                  <span className="text-sm text-[#a8a8c0]">（6 張紙）</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span>28 面</span>
+                  <span className="text-sm text-[#a8a8c0]">（7 張紙）</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span>32 面</span>
+                  <span className="text-sm text-[#a8a8c0]">（8 張紙）</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span>36 面</span>
+                  <span className="text-sm text-[#a8a8c0]">（9 張紙）</span>
+                </div>
+                <div className="flex flex-col items-center  mr-[-24px]">
+                  <span>40 面</span>
+                  <span className="text-sm text-[#a8a8c0]">（10 張紙）</span>
+                </div>
               </div>
             </div>
           </div>

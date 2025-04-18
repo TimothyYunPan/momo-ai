@@ -114,7 +114,7 @@ export default function StoryOutLineCheck({ setStoryStep, storyOutline, setCompl
   return (
     <main className="max-w-[1200px] mx-auto">
       <div className="mb-12">
-        <h2 className="text-3xl font-bold mb-12 text-[#323343]">已根據您的設定產生故事大綱</h2>
+        <h2 className="text-3xl font-bold mb-12 text-[#323343] mt-10">已根據您的設定產生故事大綱</h2>
 
         {/* 進度指示器 - 修改顏色 */}
         <div className="flex items-center justify-center mb-12 max-w-[456px] mx-auto">
