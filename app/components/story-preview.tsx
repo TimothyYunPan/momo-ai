@@ -155,7 +155,7 @@ export default function StoryPreview({ setStoryStep, completedStory, storyId }: 
     }
 
     try {
-      const response = await fetch('/api/proxy/api/v1/epson/print_picture_book', {
+      const response = await fetch('/api/proxy/api/v1/picture_book/print_picture_book', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
