@@ -197,7 +197,7 @@ export default function StorySetting({ setStoryStep, storyData, setStoryData, se
             <textarea
               className="w-full p-4 border border-gray-200 rounded-lg resize-none"
               rows={3}
-              placeholder="一隻好奇的浣熊，叫做小米，喜歡在花園玩耍，認識新朋友..."
+              placeholder="主角是叫東東的小浣熊，住在森林裡..."
               value={storyData.characters}
               onChange={(e) => setStoryData({ ...storyData, characters: e.target.value })}
               required
