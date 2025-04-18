@@ -110,7 +110,7 @@ export default function MomoRecordPage() {
                     strokeWidth="2"
                   />
                 </svg>
-                墨墨創作
+                墨墨著色
               </NavButton>
             </Link>
             <NavButton isActive={true}>

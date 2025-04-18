@@ -103,7 +103,7 @@ export default function MemoryPreviewPage() {
                 <path d="M12 8V16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 <path d="M8 12H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
-              墨墨創作
+              墨墨著色
             </Link>
             <Link
               href="/momo-record"

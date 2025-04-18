@@ -31,7 +31,7 @@ const defaultStoryData = {
   ageGroup: "FIRST_GRADE",
   characters: "",
   style: "SOFT_WATERCOLOR",
-  pageCount: 5,
+  pageCount: 11,
 }
 
 const defaultStoryOutline = {
